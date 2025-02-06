@@ -1,0 +1,10 @@
+.container {
+  column-count: 3;
+  column-width: 250px;
+  column-gap: 10px;
+  column-rule: 5px dotted slategrey;
+}
+
+.box {
+  column-span: all;
+}
