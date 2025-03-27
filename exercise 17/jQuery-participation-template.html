@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Input History Participation</title>
+        <!-- jQuery CDN -->
+        <!-- Add jQuery here -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <style>
+            body {
+                width: 80%;
+                max-width: 900px;
+                margin: 1rem auto;
+                padding: 0.25rem;
+                border: 1px solid black;
+            }
+
+            header {
+                display: flex;
+                justify-content: center;
+            }
+
+            h1,
+            #display {
+                margin: 0;
+            }
+
+            h3 {
+                margin: 0.25rem 0 0 0;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <h1>Input History Participation - &lt;name&gt;</h1>
+        </header>
+
+        <main>
+            <hr />
+            <h3>You entered:</h3>
+            <p id="display">Nothing yet!</p>
+            <br />
+
+            <form>
+                <label for="userIn">Input:</label>
+                <input type="text" id="userIn" placeholder="Enter text...">
+                <input type="button" id="submit" value="Submit" onclick="userSubmit()">
+                <input type="button" id="clear" value="Clear History" onclick="userClear()">
+            </form>
+
+            <br />
+
+            <h3>Input History:</h3>
+            <ol id="histList">
+
+            </ol>
+        </main>
+
+        <footer>
+            <hr />
+            &copy; Red Deer Polytechnic | CC BY-SA-NC
+        </footer>
+
+        <script>
+            // Track number of inputs so initial value is not added to history.
+            let numInputs = 0;
+
+            // Submit form when enter is pressed
+            $("#userIn").on("keypress", function (event) { // Update this
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    userSubmit();
+                }
+            });
+
+            function userSubmit() {
+                let userInput = $("#userIn").val(); // Update this
+                let lastInput = $("#display").text(); // Update this
+
+                if (userInput != "") {
+                    $("#display").text(userInput); // Update this
+                    if (numInputs != 0) {
+                        // let newHist = document.createElement("li");          // Update this  ╗
+                        // newHist.innerText = lastInput;                       // Update this  ╠ These 3 lines can be condensed into one with jQuery
+                        // document.getElementById("histList").append(newHist); // Update this  ╝
+                        $("#histList").append(`<li> ${lastInput} </li>`);
+                    }
+                    numInputs++;
+                }
+
+                $("#userIn").val(""); // Clears input field upon clicking "Submit". Update this
+            }
+
+            function userClear() {
+                $("#histList").text(""); // Update this
+                $("#display").text("Nothing yet!"); // Update this
+                numInputs = 0;
+            }
+        </script>
+
+</html>
